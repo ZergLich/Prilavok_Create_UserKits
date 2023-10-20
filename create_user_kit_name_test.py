@@ -16,9 +16,17 @@ symbol_del      = "DELETE"
 symbol_int      = 123
 
 
+# Базовая функция для проведения проверок различных вариантов названия набора, создаваемого под пользователем Я.Прилавок
+# name - Название создаваемого набора. Подставляется одна из переменных symbol_... .
+# test_type (bool) - Тип проверки: позитивная (значение True) или негативная (значение False)
 def _testing_kitname(name, test_type):
+    # Создание нового пользователя
     user_token = request_lib.post_create_user()
+
+    # Создание набора с заданным названием под вновь созданным пользователем
     kit = request_lib.post_create_kit(user_token.json()["authToken"], name)
+
+    # Сравнение ФР и ОР в зависимости от типа проверки (позитивная или негативная)
     if (test_type):
         assert kit.status_code == 201
         assert kit.json()["name"] == name
@@ -27,7 +35,7 @@ def _testing_kitname(name, test_type):
 
 
 
-
+# ------------ Т Е С Т Ы -----------------
 
 
 # Тест 01 - Допустимое название из одного символа
