@@ -1,11 +1,11 @@
 import requests
 
 import data
-import urls
+import configuration
 
 # Функция для создания нового пользователя
 def post_create_user():
-    return requests.post(urls.STAND_URL + urls.CREATE_USER_PATH,
+    return requests.post(configuration.STAND_URL + configuration.CREATE_USER_PATH,
                          headers = data.user_headers,
                          json = data.user_body)
 
@@ -27,7 +27,7 @@ def post_create_kit(user_token_str, kit_name):
         kit_body["name"] = kit_name
 
     # Возвращаем результат запроса на создание нового набора
-    return requests.post(urls.STAND_URL + urls.CREATE_KIT_PATH,
+    return requests.post(configuration.STAND_URL + configuration.CREATE_KIT_PATH,
                          headers = kits_headers,
                          json = kit_body
                         )

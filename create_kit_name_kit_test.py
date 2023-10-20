@@ -1,6 +1,6 @@
 import pytest
 import data
-import request_lib
+import sender_stand_request
 
 # Тестовые названия наборов
 symbol_1        = "а"
@@ -21,10 +21,10 @@ symbol_int      = 123
 # test_type (bool) - Тип проверки: позитивная (значение True) или негативная (значение False)
 def _testing_kitname(name, test_type):
     # Создание нового пользователя
-    user_token = request_lib.post_create_user()
+    user_token = sender_stand_request.post_create_user()
 
     # Создание набора с заданным названием под вновь созданным пользователем
-    kit = request_lib.post_create_kit(user_token.json()["authToken"], name)
+    kit = sender_stand_request.post_create_kit(user_token.json()["authToken"], name)
 
     # Сравнение ФР и ОР в зависимости от типа проверки (позитивная или негативная)
     if (test_type):
